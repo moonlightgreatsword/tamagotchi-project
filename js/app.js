@@ -3,3 +3,5 @@ class Tamagotchi {
         this.name = name;
     }
 }
+
+const pet = new Tamagotchi("name");
