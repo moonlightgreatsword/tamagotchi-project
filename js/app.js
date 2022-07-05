@@ -1,1 +1,5 @@
-console.log("hello")
+class Tamagotchi {
+    constructor(name) {
+        this.name = name;
+    }
+}
