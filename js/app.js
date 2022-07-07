@@ -1,6 +1,22 @@
 // create a class for the pet
     // placeholder name
 
+let enteredName = ""
+const petName = document.querySelector("#name")
+const petHunger = document.querySelector("#hunger")
+const petSleepiness = document.querySelector("#sleepiness");
+const petBoredom = document.querySelector("#boredom");
+const petAge = document.querySelector("#age");
+const foodButton = document.querySelector("#feed")
+const lightSwitch = document.querySelector("#lights");
+const playButton = document.querySelector("#play");
+
+const naming = () => {
+    enteredName = document.querySelector("#pet-name").value
+    console.log(enteredName)
+    petName.innerText = enteredName
+}
+
 class Tamagotchi {
     constructor(name) {
         this.name = name;
@@ -21,10 +37,11 @@ class Tamagotchi {
     }
 }
 
+const startButton = document.getElementById("start")
+const petNameField = document.querySelector("#pet-name")
+
 // instantiate the pet class
     // placeholder name
-
-const pet = new Tamagotchi("Tony");
 
 // object for the game
     // key value for lights
@@ -32,6 +49,18 @@ const pet = new Tamagotchi("Tony");
 
 const game = {
     lightsOn: true,
+    openTheGame: () => {
+        console.log(startButton.elements["pet-name"].value)
+        // https://www.javascripttutorial.net/javascript-dom/javascript-form/
+        const pet = new Tamagotchi(`${startButton.elements["pet-name"].value}`);
+        petHunger.innerText = `Hunger: ${pet.hunger}`;
+        petSleepiness.innerText = `Sleepiness: ${pet.sleepiness}`;
+        petBoredom.innerText = `Boredom: ${pet.boredom}`;
+        petAge.innerText = `Age: ${pet.age}`;
+        foodButton.addEventListener("click", pet.feed);
+        lightSwitch.addEventListener("click", game.toggleLights);
+        playButton.addEventListener("click", pet.play);
+    },
     toggleLights: () => {
         // learned how to toggle a boolean from here: https://bobbyhadz.com/blog/javascript-toggle-boolean
         game.lightsOn = !game.lightsOn
@@ -42,27 +71,3 @@ const game = {
         }
     }
 }
-
-// fill h3 elements with pet stats
-
-const petName = document.querySelector("#name")
-petName.innerText = pet.name
-const petHunger = document.querySelector("#hunger")
-petHunger.innerText = `Hunger: ${pet.hunger}`
-const petSleepiness = document.querySelector("#sleepiness");
-petSleepiness.innerText = `Sleepiness: ${pet.sleepiness}`
-const petBoredom = document.querySelector("#boredom");
-petBoredom.innerText = `Boredom: ${pet.boredom}`
-const petAge = document.querySelector("#age");
-petAge.innerText = `Age: ${pet.age}`
-
-// add event listeners for the buttons
-
-const foodButton = document.querySelector("#feed")
-foodButton.addEventListener("click", pet.feed)
-
-const lightSwitch = document.querySelector("#lights");
-lightSwitch.addEventListener("click", game.toggleLights);
-
-const playButton = document.querySelector("#play");
-playButton.addEventListener("click", pet.play)
