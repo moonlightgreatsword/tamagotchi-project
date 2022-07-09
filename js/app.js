@@ -13,7 +13,7 @@ const startButton = document.getElementById("start");
 const petNameField = document.querySelector("#pet-name");
 const enclosure = document.getElementById("enclosure");
 // starting class
-let pet = {
+const pet = {
     name: "",
     hunger: 5,
     sleepiness: 1,
@@ -38,6 +38,12 @@ let pet = {
     },
     getOld: () => {
         pet.age++;
+        // if (pet.age = 10) {
+        //     alert(`Congratulations! ${pet.name} has evolved into ${pet.name} 2!`);
+        //     pet.name = `${pet.name} 2`;
+        //     petName.innerText = `${pet.name}`;
+        //     updateAge();
+        // } else {updateAge();}
         updateAge();
         console.log(`Happy birthday! ${pet.name} has gotten older!`)
     },
@@ -111,11 +117,18 @@ const runClock = () => {
         pet.getHungry();
         pet.getSleepy();
         pet.getBored();
+        pet.getOld();
         if (pet.hunger >= 10 || pet.hunger < 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
             clearInterval(timers)
             alert("Your pet has died, thanks to your cringe parenting.")
         }
     }, 10000);
+    // let ageTimer = setInterval(() => {
+    //     pet.getOld();
+    //     if (pet.hunger >= 10 || pet.hunger <= 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
+    //         clearInterval(ageTimer)
+    //     }
+    // }, 60000)
 }
 // start the game
 const openTheGame = () => {
@@ -127,12 +140,6 @@ const openTheGame = () => {
     playButton.addEventListener("click", pet.play);
     // run the hunger, sleep, boredom functions at set intervals
     runClock();
-    let ageTimer = setInterval(() => {
-        pet.getOld();
-        if (pet.hunger >= 10 || pet.hunger <= 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
-            clearInterval(ageTimer)
-        }
-    }, 60000)
 }
 // name and start
 const naming = () => {
