@@ -43,20 +43,37 @@ let pet = {
     // functions to decrease the stats
     feed: () => {
         pet.hunger--;
-        petHunger.innerText = `Hunger: ${pet.hunger}`;
+        updateHunger();
         console.log("Yum yum yum!");
     },
     play: () => {
-        pet.boredom--;
-        petBoredom.innerText = `Boredom: ${pet.boredom}`;
-        console.log("Whee!")
+        if (pet.boredom > 0) {
+            pet.boredom--;
+            updateBoredom();
+            console.log("Whee!")
+        } else {
+            alert(`${pet.name} doesn't want to play anymore!`)
+            console.log("Can't play right now")
+        }
     },
     toggleLights: () => {
         // learned how to toggle a boolean from here: https://bobbyhadz.com/blog/javascript-toggle-boolean
         pet.lightsOn = !pet.lightsOn
         if (pet.lightsOn) {
         console.log("The lights have been turned on.")
+        // let timers = setInterval(() => {
+        //     pet.getHungry();
+        //     pet.getSleepy();
+        //     pet.getBored();
+        //     if (pet.hunger >= 10 || pet.hunger <= 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
+        //         clearInterval(timers)
+        //         alert("Your pet has died, thanks to your cringe parenting.")
+        //     }
+        // }, 10000);
         } else {
+            pet.sleepiness = 1;
+            updateSleepiness();
+            // clearInterval(timers)
             console.log("The lights have been turned off.")
         }
     }
@@ -91,8 +108,7 @@ const runClock = () => {
         pet.getHungry();
         pet.getSleepy();
         pet.getBored();
-        pet.getOld();
-        if (pet.hunger >= 10 || pet.hunger <= 0) {
+        if (pet.hunger >= 10 || pet.hunger < 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
             clearInterval(timers)
             alert("Your pet has died, thanks to your cringe parenting.")
         }
@@ -108,6 +124,12 @@ const openTheGame = () => {
     playButton.addEventListener("click", pet.play);
     // run the hunger, sleep, boredom functions at set intervals
     runClock();
+    let ageTimer = setInterval(() => {
+        pet.getOld();
+        if (pet.hunger >= 10 || pet.hunger <= 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
+            clearInterval(ageTimer)
+        }
+    }, 60000)
 }
 // name and start
 const naming = () => {
