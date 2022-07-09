@@ -9,8 +9,9 @@ const petAge = document.querySelector("#age");
 const foodButton = document.querySelector("#feed")
 const lightSwitch = document.querySelector("#lights");
 const playButton = document.querySelector("#play");
-const startButton = document.getElementById("start")
-const petNameField = document.querySelector("#pet-name")
+const startButton = document.getElementById("start");
+const petNameField = document.querySelector("#pet-name");
+const enclosure = document.getElementById("enclosure");
 // starting class
 let pet = {
     name: "",
@@ -60,7 +61,8 @@ let pet = {
         // learned how to toggle a boolean from here: https://bobbyhadz.com/blog/javascript-toggle-boolean
         pet.lightsOn = !pet.lightsOn
         if (pet.lightsOn) {
-        console.log("The lights have been turned on.")
+            enclosure.style.backgroundColor = "rgb(255, 255, 255)";
+            console.log("The lights have been turned on.");
         // let timers = setInterval(() => {
         //     pet.getHungry();
         //     pet.getSleepy();
@@ -71,6 +73,7 @@ let pet = {
         //     }
         // }, 10000);
         } else {
+            enclosure.style.backgroundColor = "rgb(0, 0, 0)";
             pet.sleepiness = 1;
             updateSleepiness();
             // clearInterval(timers)
