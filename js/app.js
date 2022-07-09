@@ -11,10 +11,21 @@ const foodButton = document.querySelector("#feed")
 const lightSwitch = document.querySelector("#lights");
 const playButton = document.querySelector("#play");
 
+const updateHunger = () => {
+    petHunger.innerText = `Hunger: ${pet.hunger}`;
+}
+const updateSleepiness = () => {
+    petSleepiness.innerText = `Sleepiness: ${pet.sleepiness}`;
+}
+const updateBoredom = () => {
+    petBoredom.innerText = `Boredom: ${pet.boredom}`;
+}
+
 const naming = () => {
     enteredName = document.querySelector("#pet-name").value
     console.log(enteredName)
     petName.innerText = enteredName
+    game.openTheGame();
 }
 
 class Tamagotchi {
@@ -24,6 +35,18 @@ class Tamagotchi {
         this.sleepiness = 1;
         this.boredom = 1;
         this.age = 1;
+        this.getHungry = () => {
+            this.hunger++;
+            updateHunger();
+        }
+        this.getSleepy = () => {
+            this.sleepiness++;
+            updateSleepiness();
+        }
+        this.getBored = () => {
+            this.boredom++;
+            updateBoredom();
+        }
         this.feed = () => {
             this.hunger -= 1;
             petHunger.innerText = `Hunger: ${this.hunger}`;
@@ -50,7 +73,6 @@ const petNameField = document.querySelector("#pet-name")
 const game = {
     lightsOn: true,
     openTheGame: () => {
-        console.log(startButton.elements["pet-name"].value)
         // https://www.javascripttutorial.net/javascript-dom/javascript-form/
         const pet = new Tamagotchi(`${startButton.elements["pet-name"].value}`);
         petHunger.innerText = `Hunger: ${pet.hunger}`;
@@ -60,6 +82,7 @@ const game = {
         foodButton.addEventListener("click", pet.feed);
         lightSwitch.addEventListener("click", game.toggleLights);
         playButton.addEventListener("click", pet.play);
+        setInterval(, 3000);
     },
     toggleLights: () => {
         // learned how to toggle a boolean from here: https://bobbyhadz.com/blog/javascript-toggle-boolean
