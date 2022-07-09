@@ -87,17 +87,16 @@ const updateAll = () => {
 // run the hunger, sleep, boredom, age functions at set intervals
 const runClock = () => {
     // thank you w3schools for my life https://www.w3schools.com/js/js_timing.asp
-    let hungerTimer = setInterval(pet.getHungry, 10000);
-    let sleepyTimer = setInterval(pet.getSleepy, 10000);
-    let boredomTimer = setInterval(pet.getBored, 10000);
-    let timesCruelMarch = setInterval(pet.getOld, 60000);
-    if (pet.hunger >= 10 || pet.hunger <= 0 || pet.sleepiness >= 10 || pet.boredom >= 10) {
-        clearInterval(hungerTimer);
-        clearInterval(sleepyTimer);
-        clearInterval(boredomTimer);
-        clearInterval(timesCruelMarch);
-        alert("Your pet has died, thanks to your cringe parenting.")
-    }
+    let timers = setInterval(() => {
+        pet.getHungry();
+        pet.getSleepy();
+        pet.getBored();
+        pet.getOld();
+        if (pet.hunger >= 10 || pet.hunger <= 0) {
+            clearInterval(timers)
+            alert("Your pet has died, thanks to your cringe parenting.")
+        }
+    }, 10000);
 }
 // start the game
 const openTheGame = () => {
