@@ -12,7 +12,7 @@ const playButton = document.querySelector("#play");
 const startButton = document.getElementById("start")
 const petNameField = document.querySelector("#pet-name")
 // starting class
-const pet = {
+let pet = {
     name: "",
     hunger: 5,
     sleepiness: 1,
@@ -21,36 +21,40 @@ const pet = {
     lightsOn: true,
     // functions to increase the stats
     getHungry: () => {
-        this.hunger++
+        pet.hunger++;
         updateHunger();
+        console.log(`${pet.name} has gotten hungrier!`)
     },
     getSleepy: () => {
-        this.sleepiness++
+        pet.sleepiness++;
         updateSleepiness();
+        console.log(`${pet.name} has gotten sleepier!`)
     },
     getBored: () => {
-        this.boredom++;
+        pet.boredom++;
         updateBoredom();
+        console.log(`${pet.name} has gotten more bored!`)
     },
     getOld: () => {
-        this.age++;
+        pet.age++;
         updateAge();
+        console.log(`Happy birthday! ${pet.name} has gotten older!`)
     },
     // functions to decrease the stats
     feed: () => {
-        this.hunger -= 1;
-        petHunger.innerText = `Hunger: ${this.hunger}`;
+        pet.hunger--;
+        petHunger.innerText = `Hunger: ${pet.hunger}`;
         console.log("Yum yum yum!");
     },
     play: () => {
-        this.boredom -= 1;
-        petBoredom.innerText = `Boredom: ${this.boredom}`;
+        pet.boredom--;
+        petBoredom.innerText = `Boredom: ${pet.boredom}`;
         console.log("Whee!")
     },
     toggleLights: () => {
         // learned how to toggle a boolean from here: https://bobbyhadz.com/blog/javascript-toggle-boolean
-        this.lightsOn = !this.lightsOn
-        if (this.lightsOn) {
+        pet.lightsOn = !pet.lightsOn
+        if (pet.lightsOn) {
         console.log("The lights have been turned on.")
         } else {
             console.log("The lights have been turned off.")
@@ -60,15 +64,19 @@ const pet = {
 // update the stat values
 const updateHunger = () => {
     petHunger.innerText = `Hunger: ${pet.hunger}`;
+    console.log(`The value of pet.hunger has been updated, and is now ${pet.hunger}`)
 }
 const updateSleepiness = () => {
     petSleepiness.innerText = `Sleepiness: ${pet.sleepiness}`;
+    console.log(`The value of pet.sleepiness has been updated, and is now ${pet.sleepiness}`)
 }
 const updateBoredom = () => {
     petBoredom.innerText = `Boredom: ${pet.boredom}`;
+    console.log(`The value of pet.boredom has been updated, and is now ${pet.boredom}`)
 }
 const updateAge = () => {
     petAge.innerText = `Age: ${pet.age}`;
+    console.log(`The value of pet.age has been updated, and is now ${pet.age}`)
 }
 const updateAll = () => {
     updateHunger();
@@ -79,12 +87,15 @@ const updateAll = () => {
 // run the hunger, sleep, boredom, age functions at set intervals
 const runClock = () => {
     // thank you w3schools for my life https://www.w3schools.com/js/js_timing.asp
-    setInterval(pet.getHungry(), 10000);
-    setInterval(pet.getSleepy(), 10000);
-    setInterval(pet.getBored(), 10000);
-    setInterval(pet.getOld(), 60000);
+    let hungerTimer = setInterval(pet.getHungry, 10000);
+    let sleepyTimer = setInterval(pet.getSleepy, 10000);
+    let boredomTimer = setInterval(pet.getBored, 10000);
+    let timesCruelMarch = setInterval(pet.getOld, 60000);
     if (pet.hunger >= 10 || pet.hunger <= 0 || pet.sleepiness >= 10 || pet.boredom >= 10) {
-        clearInterval(runClock)
+        clearInterval(hungerTimer);
+        clearInterval(sleepyTimer);
+        clearInterval(boredomTimer);
+        clearInterval(timesCruelMarch);
         alert("Your pet has died, thanks to your cringe parenting.")
     }
 }
