@@ -20,6 +20,7 @@ const pet = {
     boredom: 1,
     age: 1,
     lightsOn: true,
+    alive: true,
     // functions to increase the stats
     getHungry: () => {
         pet.hunger++;
@@ -38,12 +39,13 @@ const pet = {
     },
     getOld: () => {
         pet.age++;
-        // if (pet.age = 10) {
-        //     alert(`Congratulations! ${pet.name} has evolved into ${pet.name} 2!`);
-        //     pet.name = `${pet.name} 2`;
-        //     petName.innerText = `${pet.name}`;
-        //     updateAge();
-        // } else {updateAge();}
+        // pet evolution
+        if (pet.age == 10) {
+            alert(`Congratulations! ${pet.name} has evolved into ${pet.name} 2!`);
+            pet.name = `${pet.name} 2`;
+            petName.innerText = `${pet.name}`;
+            updateAge();
+        } else {updateAge();}
         updateAge();
         console.log(`Happy birthday! ${pet.name} has gotten older!`)
     },
@@ -69,15 +71,6 @@ const pet = {
         if (pet.lightsOn) {
             enclosure.style.backgroundColor = "rgb(255, 255, 255)";
             console.log("The lights have been turned on.");
-        // let timers = setInterval(() => {
-        //     pet.getHungry();
-        //     pet.getSleepy();
-        //     pet.getBored();
-        //     if (pet.hunger >= 10 || pet.hunger <= 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
-        //         clearInterval(timers)
-        //         alert("Your pet has died, thanks to your cringe parenting.")
-        //     }
-        // }, 10000);
         } else {
             enclosure.style.backgroundColor = "rgb(0, 0, 0)";
             pet.sleepiness = 1;
@@ -119,16 +112,11 @@ const runClock = () => {
         pet.getBored();
         pet.getOld();
         if (pet.hunger >= 10 || pet.hunger < 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
+            pet.alive = !pet.alive;
             clearInterval(timers)
             alert("Your pet has died, thanks to your cringe parenting.")
         }
     }, 10000);
-    // let ageTimer = setInterval(() => {
-    //     pet.getOld();
-    //     if (pet.hunger >= 10 || pet.hunger <= 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
-    //         clearInterval(ageTimer)
-    //     }
-    // }, 60000)
 }
 // start the game
 const openTheGame = () => {
