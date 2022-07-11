@@ -25,21 +25,25 @@ h2 {
 #enclosure {
     background-color: rgb(255, 255, 255);
     height: 300px;
-    width: 800px;;
+    width: 300px;;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-@keyframes slide {
-    from {left:55%};
-    to {right:45%};
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #pet-img {
     position: relative;
-    animation-name: slide;
-    animation-duration: 4s, 2s;
+    animation-name: spin;
+    animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
