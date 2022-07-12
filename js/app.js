@@ -12,6 +12,10 @@ const playButton = document.querySelector("#play");
 const startButton = document.getElementById("start");
 const petNameField = document.querySelector("#pet-name");
 const enclosure = document.getElementById("enclosure");
+const petImage = document.createElement("img")
+petImage.setAttribute("src", "https://static.wikia.nocookie.net/rude-tales-of-magic/images/c/cb/Flipcup.jpg/")
+petImage.setAttribute("alt", "A screaming creature with the head of a bear and the body of an owl")
+petImage.setAttribute("id", "pet-img")
 // starting class
 const pet = {
     name: "",
@@ -118,12 +122,14 @@ const runClock = () => {
         if (pet.hunger >= 10 || pet.boredom >= 10 || pet.sleepiness >= 10) {
             enclosure.style.backgroundColor = "rgb(197, 222, 205)";
             alert("Your pet has died, thanks to your cringe parenting.");
+            petImage.remove();
             clearInterval(timers)
         }
     }, 5000);
 }
 // start the game
 const openTheGame = () => {
+    enclosure.appendChild(petImage)
     // https://www.javascripttutorial.net/javascript-dom/javascript-form/
     pet.name = `${startButton.elements["pet-name"].value}`;
     updateAll();
