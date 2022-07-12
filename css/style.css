@@ -1,5 +1,5 @@
 * {
-    background-color: rgb(255, 230, 230);
+    background-color: rgb(229, 212, 192);
 }
 
 body {
@@ -12,6 +12,11 @@ body {
 
 h2 {
     font-family: serif;
+    color: rgb(73, 81, 89);
+    background-color: rgb(250, 201, 184);
+    border: 6px solid rgb(73, 81, 89);
+    padding: 20px;
+    border-radius: 20px;
 }
 
 #stats {
@@ -23,18 +28,19 @@ h2 {
 }
 
 #enclosure {
-    background-color: rgb(255, 255, 255);
-    height: 300px;
-    width: 300px;;
+    background-color: rgb(161, 232, 204);
+    border: 8px solid rgb(73, 81, 89);
+    border-radius: 20px;
+    height: 400px;
+    width: 400px;;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* learned animation here: https://www.w3schools.com/css/css3_animations.asp */
+/* learned how to rotate here: https://stackoverflow.com/questions/16771225/css3-rotate-animation */
 @keyframes spin {
-    0% {
-        transform: rotate(0);
-    }
     100% {
         transform: rotate(360deg);
     }
@@ -57,6 +63,10 @@ h2 {
 }
 
 #buttons button {
+    color: rgb(73, 81, 89);
+    background-color: rgb(250, 201, 184);
+    border: 4px solid rgb(73, 81, 89);
+    border-radius: 10px;
     width: 100px;
     height: 50px;
     font-weight: bold;

@@ -20,7 +20,6 @@ const pet = {
     boredom: 1,
     age: 1,
     lightsOn: true,
-    alive: true,
     // functions to increase the stats
     getHungry: () => {
         pet.hunger++;
@@ -51,9 +50,14 @@ const pet = {
     },
     // functions to decrease the stats
     feed: () => {
-        pet.hunger--;
-        updateHunger();
-        console.log("Yum yum yum!");
+        if (pet.hunger > 0) {
+            pet.hunger--;
+            updateHunger();
+            console.log("Yum yum yum!");
+        } else {
+            alert(`${pet.name} doesn't want to eat anymore!`)
+            console.log("Can't eat right now")
+        }
     },
     play: () => {
         if (pet.boredom > 0) {
@@ -69,10 +73,10 @@ const pet = {
         // learned how to toggle a boolean from here: https://bobbyhadz.com/blog/javascript-toggle-boolean
         pet.lightsOn = !pet.lightsOn
         if (pet.lightsOn) {
-            enclosure.style.backgroundColor = "rgb(255, 255, 255)";
+            enclosure.style.backgroundColor = "rgb(161, 232, 204)";
             console.log("The lights have been turned on.");
         } else {
-            enclosure.style.backgroundColor = "rgb(0, 0, 0)";
+            enclosure.style.backgroundColor = "rgb(73, 81, 89)";
             pet.sleepiness = 1;
             updateSleepiness();
             // clearInterval(timers)
@@ -111,12 +115,12 @@ const runClock = () => {
         pet.getSleepy();
         pet.getBored();
         pet.getOld();
-        if (pet.hunger >= 10 || pet.hunger < 0 || pet.boredom >= 10 || pet.sleepiness >= 10) {
-            pet.alive = !pet.alive;
+        if (pet.hunger >= 10 || pet.boredom >= 10 || pet.sleepiness >= 10) {
+            enclosure.style.backgroundColor = "rgb(197, 222, 205)";
+            alert("Your pet has died, thanks to your cringe parenting.");
             clearInterval(timers)
-            alert("Your pet has died, thanks to your cringe parenting.")
         }
-    }, 10000);
+    }, 5000);
 }
 // start the game
 const openTheGame = () => {
